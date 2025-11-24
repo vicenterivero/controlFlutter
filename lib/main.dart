@@ -341,8 +341,8 @@ class _ControlScreenState extends State<ControlScreen> {
       child: AnimatedContainer(
         duration: const Duration(milliseconds: 100),
         margin: const EdgeInsets.all(8),
-        width: 100,
-        height: 100,
+        width: 130,
+        height: 130,
         decoration: BoxDecoration(
           shape: BoxShape.circle,
           color: Colors.white,
@@ -380,61 +380,64 @@ class _ControlScreenState extends State<ControlScreen> {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               // --- Controles de flechas ---
-              Column(
+              Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  _circleButton(Icons.arrow_drop_up, "Arriba"),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      _circleButton(Icons.arrow_left, "Izquierda"),
-                      const SizedBox(width: 80),
-                      _circleButton(Icons.arrow_right, "Derecha"),
-                    ],
-                  ),
-                  _circleButton(Icons.arrow_drop_down, "Abajo"),
-                ],
-              ),
-
-              // --- Botones de acciones ---
-              Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Row(
+                  Column(
                     children: [
                       Text(
                         widget.usuario,
-                        style: const TextStyle(color: Colors.white),
+                        style: const TextStyle(
+                          color: Colors.white,
+                          fontSize: 20,
+                        ),
                       ),
                       IconButton(
                         icon: const Icon(Icons.restart_alt),
                         color: Colors.white,
+                        iconSize: 40,
                         onPressed: () {
                           Navigator.pushAndRemoveUntil(
                             context,
                             MaterialPageRoute(
                               builder: (_) => const QrInitScreen(),
                             ),
-                            (route) =>
-                                false, // elimina toda la pila de navegación
+                            (route) => false,
                           );
                         },
                       ),
                     ],
                   ),
 
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
+                  Column(
                     children: [
-                      _circleButton(Icons.watch, "Reloj"),
-                      const SizedBox(width: 50),
-                      _circleButton(Icons.flash_on, "Rayo"),
+                      const SizedBox(height: 150),
+                      _circleButton(Icons.arrow_left, "Izquierda"),
                     ],
                   ),
-                  const SizedBox(height: 20),
-                  _circleButton(Icons.adjust, "Proyectil"),
                 ],
               ),
+              Column(
+                children: [
+                  const SizedBox(height: 130),
+
+                  _circleButton(Icons.arrow_drop_up, "Arriba"),
+                ],
+              ),
+              // --- Controles de flechas ---
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Column(
+                    children: [
+                      const SizedBox(height: 150), // Para alinearlo en diagonal
+                      _circleButton(Icons.arrow_right, "Derecha"),
+                    ],
+                  ),
+                  Column(children: [_circleButton(Icons.adjust, "Habilidad")]),
+                ],
+              ),
+              // --- Botones de acciones ---
             ],
           ),
         ),
